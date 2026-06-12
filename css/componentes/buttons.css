@@ -1,0 +1,100 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 18px;
+    border-radius: var(--radius);
+    border: none;
+    font-size: .82rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition);
+    white-space: nowrap;
+    letter-spacing: .02em;
+}
+
+.btn:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+.btn-primary {
+    background: var(--gradient-main);
+    color: #1a1a2e;
+    font-weight: 700;
+    box-shadow: 0 0 18px rgba(201,168,76,.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+    box-shadow: 0 0 28px rgba(201,168,76,.5), 0 2px 8px rgba(0,0,0,.3);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: var(--bg-3);
+    color: var(--text-2);
+    border: 1px solid var(--border-light);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: var(--bg-4);
+    border-color: var(--dorado);
+    color: var(--dorado);
+}
+
+.btn-success {
+    background: var(--success-bg);
+    color: var(--success);
+    border: 1px solid rgba(122,158,126,.28);
+}
+
+.btn-success:hover:not(:disabled) {
+    background: rgba(122,158,126,.22);
+    box-shadow: 0 0 14px rgba(122,158,126,.3);
+}
+
+.btn-danger {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: 1px solid rgba(217,123,108,.28);
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: rgba(217,123,108,.22);
+    box-shadow: 0 0 14px rgba(217,123,108,.3);
+}
+
+.btn-warning {
+    background: var(--warning-bg);
+    color: var(--warning);
+    border: 1px solid rgba(224,168,74,.28);
+}
+
+.btn-warning:hover:not(:disabled) {
+    background: rgba(224,168,74,.22);
+}
+
+.btn-info {
+    background: var(--info-bg);
+    color: var(--info);
+    border: 1px solid rgba(138,180,201,.28);
+}
+
+.btn-info:hover:not(:disabled) {
+    background: rgba(138,180,201,.22);
+    box-shadow: 0 0 14px rgba(138,180,201,.3);
+}
+
+.btn-sm   { padding: 5px 12px; font-size: .78rem; }
+.btn-lg   { padding: 11px 28px; font-size: .9rem; }
+.btn-full { width: 100%; }
+.btn-icon { padding: 7px; width: 32px; height: 32px; }
+
+.btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+@keyframes spin { to { transform: rotate(360deg); } }

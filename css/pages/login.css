@@ -1,0 +1,128 @@
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.login-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(201,168,76,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+.login-bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .18;
+    animation: orbFloat 11s ease-in-out infinite;
+}
+
+.login-bg-orb:nth-child(2) {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, #c9a84c, transparent 70%);
+    top: -120px; left: -120px;
+    animation-delay: 0s;
+}
+
+.login-bg-orb:nth-child(3) {
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, #7a9e7e, transparent 70%);
+    bottom: -90px; right: -90px;
+    animation-delay: 4s;
+}
+
+.login-box {
+    position: relative;
+    z-index: 2;
+    background: var(--bg-2);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow:
+        0 0 0 1px rgba(201,168,76,.07),
+        var(--shadow-lg);
+    animation: loginBoxIn .45s cubic-bezier(.34,1.56,.64,1);
+}
+
+.login-theme-toggle {
+    position: fixed;
+    top: 20px; right: 20px;
+    z-index: 5;
+    width: auto;
+    padding: 7px 12px;
+}
+
+.login-logo { text-align: center; margin-bottom: 30px; }
+
+.login-logo-icon {
+    width: 54px; height: 54px;
+    background: var(--gradient-main);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    box-shadow: 0 0 30px rgba(201,168,76,.4), 0 0 60px rgba(122,158,126,.15);
+}
+
+.login-logo h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: .01em;
+}
+
+.login-logo p { font-size: .76rem; color: var(--text-3); margin-top: 5px; letter-spacing: .04em; }
+
+.login-form .form-control { padding: 10px 12px; font-size: .875rem; }
+
+.login-error {
+    background: var(--danger-bg);
+    border: 1px solid rgba(217,123,108,.25);
+    border-radius: var(--radius);
+    padding: 9px 12px;
+    font-size: .78rem;
+    color: var(--danger);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 22px;
+    font-size: .72rem;
+    color: var(--text-3);
+    letter-spacing: .03em;
+}
+
+@keyframes orbFloat {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33%      { transform: translate(14px,-14px) scale(1.03); }
+    66%      { transform: translate(-10px,8px) scale(.98); }
+}
+
+@keyframes loginBoxIn {
+    from { opacity: 0; transform: translateY(18px) scale(.97); }
+    to   { opacity: 1; transform: translateY(0)   scale(1); }
+}

@@ -1,0 +1,59 @@
+.topbar {
+    height: var(--topbar-h);
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    flex-shrink: 0;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 var(--border), var(--shadow);
+}
+
+.topbar-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-nombre {
+    font-size: .84rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -.01em;
+}
+
+.page-subtitle {
+    font-size: .74rem;
+    color: var(--text-3);
+    margin-top: 1px;
+}
+
+.page-content {
+    flex: 1;
+    padding: 24px 28px;
+    overflow-y: auto;
+}

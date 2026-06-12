@@ -1,0 +1,12 @@
+@import url('./desing.css');
+@import url('./base/reset.css');
+@import url('./base/typography.css');
+@import url('./componentes/sidebar.css');
+@import url('./componentes/topbar.css');
+@import url('./componentes/buttons.css');
+@import url('./componentes/forms.css');
+@import url('./componentes/tables.css');
+@import url('./componentes/modals.css');
+@import url('./componentes/toast.css');
+@import url('./pages/login.css');
+@import url('./pages/dashboard.css');

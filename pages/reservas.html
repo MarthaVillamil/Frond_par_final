@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservas - Restaurante XYZ</title>
+    <link rel="stylesheet" href="../css/main.css" />
+</head>
+<body>
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 11H21M3 11C3 7 6 4 12 4C18 4 21 7 21 11M3 11V17C3 19 4 20 6 20H18C20 20 21 19 21 17V11"
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 20V17C9 15.5 10 15 12 15C14 15 15 15.5 15 17V20"
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Restaurante XYZ</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="reservas.html" class="nav-item active">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span>Reservas</span>
+            </a>
+            <a href="productos.html" class="nav-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 01-8 0"/>
+                </svg>
+                <span>Productos</span>
+            </a>
+            <a href="pedidos.html" class="nav-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <polyline points="10 9 9 9 8 9"/>
+                </svg>
+                <span>Pedidos</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="theme-toggle" type="button" title="Cambiar tema">
+                <span data-theme-icon></span>
+                <span data-theme-label>Modo claro</span>
+            </button>
+            <button class="btn btn-danger btn-full" id="btn-logout">
+                Cerrar sesión
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+        <header class="topbar">
+            <div class="topbar-left">
+                <h1 class="page-title">Reservas y Mesas</h1>
+                <p class="page-subtitle">Gestión de mesas y reservas del restaurante</p>
+            </div>
+            <div class="topbar-right">
+                <div class="user-info">
+                    <span id="user-nombre" class="user-nombre"></span>
+                    <span id="user-rol" class="badge badge-secondary"></span>
+                </div>
+            </div>
+        </header>
+
+        <main class="page-content">
+
+            <div class="content-grid">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Registrar Mesa</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="mesa-form">
+                            <div class="form-group">
+                                <label class="form-label">Número de Mesa *</label>
+                                <input type="text" id="input-numero-mesa" class="form-control" placeholder="Ej: MESA-5" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Capacidad *</label>
+                                <input type="number" id="input-capacidad" class="form-control" placeholder="0" min="1" required />
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" id="btn-cancelar-mesa">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Mesas</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Número</th>
+                                    <th>Capacidad</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mesas-tbody">
+                                <tr>
+                                    <td colspan="5">Cargando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-grid">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Registrar Reserva</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="reserva-form">
+                            <div class="form-group">
+                                <label class="form-label">Nombre del Cliente *</label>
+                                <input type="text" id="input-nombre-cliente" class="form-control" placeholder="Nombre completo" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Teléfono *</label>
+                                <input type="text" id="input-telefono" class="form-control" placeholder="Número de teléfono" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Cantidad de Personas *</label>
+                                <input type="number" id="input-personas" class="form-control" placeholder="0" min="1" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Fecha *</label>
+                                <input type="date" id="input-fecha" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Hora *</label>
+                                <input type="time" id="input-hora" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Mesa *</label>
+                                <select id="input-mesa" class="form-control" required>
+                                    <option value="">Seleccione una mesa</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Observaciones</label>
+                                <textarea id="input-observaciones" class="form-control" placeholder="Observaciones adicionales" rows="2"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" id="btn-cancelar-reserva">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Reservas</h3>
+                        <div class="card-filters">
+                            <input type="date" id="filtro-fecha" class="form-control form-control-sm" />
+                            <select id="filtro-estado" class="form-control form-control-sm">
+                                <option value="">Todos los estados</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="confirmada">Confirmada</option>
+                                <option value="cancelada">Cancelada</option>
+                                <option value="finalizada">Finalizada</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Cliente</th>
+                                    <th>Teléfono</th>
+                                    <th>Personas</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservas-tbody">
+                                <tr>
+                                    <td colspan="8">Cargando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/core/app.js"></script>
+<script src="../js/core/sesion.guard.js"></script>
+<script src="../js/core/router.js"></script>
+<script src="../js/services/api.service.js"></script>
+<script src="../js/services/auth.service.js"></script>
+<script src="../js/services/ui.service.js"></script>
+<script src="../js/services/reservas.service.js"></script>
+<script src="../js/views/reservas.view.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const usuario = SesionGuard.getUser();
+    if (usuario) {
+        document.getElementById('user-nombre').textContent = usuario.nombre;
+        document.getElementById('user-rol').textContent    = usuario.rol;
+    }
+
+    document.getElementById('btn-logout').addEventListener('click', async () => {
+        await AuthService.logout();
+        SesionGuard.clearSession();
+        window.location.href = '../index.html';
+    });
+});
+</script>
+
+</body>
+</html>

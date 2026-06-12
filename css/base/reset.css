@@ -1,0 +1,82 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+img, svg {
+    display: block;
+    max-width: 100%;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(201, 168, 76, 0.4);
+}
+
+::selection {
+    background: rgba(201, 168, 76, 0.2);
+    color: var(--text-bright);
+}
+
+:focus-visible {
+    outline: 2px solid var(--dorado);
+    outline-offset: 2px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
