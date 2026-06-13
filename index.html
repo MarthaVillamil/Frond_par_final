@@ -1,162 +1,154 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema de Gestión - Restaurante XYZ</title>
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
 <body>
+    
 
-<button class="theme-toggle login-theme-toggle" type="button" title="Cambiar tema">
-    <span data-theme-icon></span>
-</button>
+    <div class="login-page">
 
-<div class="login-page">
+        <div class="login-bg">
+            <div class="login-bg-grid"></div>
+            <div class="login-bg-orb"></div>
+            <div class="login-bg-orb"></div>
+        </div>
 
-    <div class="login-bg">
-        <div class="login-bg-grid"></div>
-        <div class="login-bg-orb"></div>
-        <div class="login-bg-orb"></div>
+        <div class="login-box">
+
+            <div class="login-logo">
+                <div class="login-logo-icon">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M3 11H21M3 11C3 7 6 4 12 4C18 4 21 7 21 11M3 11V17C3 19 4 20 6 20H18C20 20 21 19 21 17V11"
+                            stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 20V17C9 15.5 10 15 12 15C14 15 15 15.5 15 17V20" stroke="#fff" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h1>Restaurante XYZ</h1>
+                <p>Sistema de Gestión</p>
+            </div>
+
+            <div id="login-error" class="login-error hidden">
+                <span>!</span>
+                <span id="login-error-msg">Error al iniciar sesión.</span>
+            </div>
+
+            <form id="login-form" class="login-form" autocomplete="off">
+
+                <div class="form-group">
+                    <label class="form-label">Usuario o Correo</label>
+                    <input type="text" id="input-usuario" class="form-control" placeholder="ingrese su usuario" required
+                        autofocus />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" id="input-contrasena" class="form-control" placeholder="Ingrese sucontraseña"
+                        required />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full btn-lg" id="btn-login">
+                    Ingresar al Sistema
+                </button>
+
+            </form>
+
+            <div class="login-footer">
+                Restaurante XYZ 2026
+            </div>
+
+        </div>
     </div>
 
-    <div class="login-box">
+    <script src="js/config.js"></script>
+    <script src="js/core/app.js"></script>
+    <script src="js/core/sesion.guard.js"></script>
+    <script src="js/services/api.service.js"></script>
+    <script src="js/services/auth.service.js"></script>
 
-        <div class="login-logo">
-            <div class="login-logo-icon">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 11H21M3 11C3 7 6 4 12 4C18 4 21 7 21 11M3 11V17C3 19 4 20 6 20H18C20 20 21 19 21 17V11"
-                          stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M9 20V17C9 15.5 10 15 12 15C14 15 15 15.5 15 17V20"
-                          stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <h1>Restaurante XYZ</h1>
-            <p>Sistema de Gestión</p>
-        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
 
-        <div id="login-error" class="login-error hidden">
-            <span>!</span>
-            <span id="login-error-msg">Error al iniciar sesión.</span>
-        </div>
+            if (SesionGuard.isLogged()) {
+                SesionGuard.redirectToDashboard();
+                return;
+            }
 
-        <form id="login-form" class="login-form" autocomplete="off">
+            const form = document.getElementById('login-form');
+            const btnLogin = document.getElementById('btn-login');
+            const errorEl = document.getElementById('login-error');
+            const errorMsg = document.getElementById('login-error-msg');
+            const inputUser = document.getElementById('input-usuario');
+            const inputPass = document.getElementById('input-contrasena');
 
-            <div class="form-group">
-                <label class="form-label">Usuario o Correo</label>
-                <input
-                    type="text"
-                    id="input-usuario"
-                    class="form-control"
-                    placeholder="admin / admin@restaurante.com"
-                    required
-                    autofocus
-                />
-            </div>
+            function showError(msg) {
+                errorMsg.textContent = msg;
+                errorEl.classList.remove('hidden');
+            }
 
-            <div class="form-group">
-                <label class="form-label">Contraseña</label>
-                <input
-                    type="password"
-                    id="input-contrasena"
-                    class="form-control"
-                    placeholder="Ingresa tu contraseña"
-                    required
-                />
-            </div>
+            function hideError() {
+                errorEl.classList.add('hidden');
+            }
 
-            <button
-                type="submit"
-                class="btn btn-primary btn-full btn-lg"
-                id="btn-login">
-                Ingresar al Sistema
-            </button>
+            function setLoading(loading) {
+                btnLogin.disabled = loading;
+                btnLogin.textContent = loading ? 'Verificando...' : 'Ingresar al Sistema';
+            }
 
-        </form>
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                hideError();
 
-        <div class="login-footer">
-            Restaurante XYZ 2026
-        </div>
+                const identificador = inputUser.value.trim();
+                const contrasena = inputPass.value;
 
-    </div>
-</div>
+                if (!identificador || !contrasena) {
+                    showError('Complete todos los campos.');
+                    return;
+                }
 
-<script src="js/config.js"></script>
-<script src="js/core/app.js"></script>
-<script src="js/core/sesion.guard.js"></script>
-<script src="js/services/api.service.js"></script>
-<script src="js/services/auth.service.js"></script>
+                setLoading(true);
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+                const res = await AuthService.login(identificador, contrasena);
 
-    if (SesionGuard.isLogged()) {
-        SesionGuard.redirectToDashboard();
-        return;
-    }
+                if (res?.ok && res.data?.success) {
+                    SesionGuard.setSession(res.data.data.token, res.data.data.usuario);
+                    btnLogin.textContent = 'Acceso concedido ✓';
+                    setTimeout(() => SesionGuard.redirectToDashboard(), 400);
+                } else {
+                    showError(res?.data?.message || 'Credenciales incorrectas.');
+                    setLoading(false);
+                    inputPass.value = '';
+                    inputPass.focus();
+                }
+            });
 
-    const form      = document.getElementById('login-form');
-    const btnLogin  = document.getElementById('btn-login');
-    const errorEl   = document.getElementById('login-error');
-    const errorMsg  = document.getElementById('login-error-msg');
-    const inputUser = document.getElementById('input-usuario');
-    const inputPass = document.getElementById('input-contrasena');
+            inputUser.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    inputPass.focus();
+                }
+            });
 
-    function showError(msg) {
-        errorMsg.textContent = msg;
-        errorEl.classList.remove('hidden');
-    }
+            inputUser.addEventListener('input', hideError);
+            inputPass.addEventListener('input', hideError);
 
-    function hideError() {
-        errorEl.classList.add('hidden');
-    }
-
-    function setLoading(loading) {
-        btnLogin.disabled    = loading;
-        btnLogin.textContent = loading ? 'Verificando...' : 'Ingresar al Sistema';
-    }
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        hideError();
-
-        const identificador = inputUser.value.trim();
-        const contrasena    = inputPass.value;
-
-        if (!identificador || !contrasena) {
-            showError('Complete todos los campos.');
-            return;
-        }
-
-        setLoading(true);
-
-        const res = await AuthService.login(identificador, contrasena);
-
-        if (res?.ok && res.data?.success) {
-            SesionGuard.setSession(res.data.data.token, res.data.data.usuario);
-            btnLogin.textContent = 'Acceso concedido ✓';
-            setTimeout(() => SesionGuard.redirectToDashboard(), 400);
-        } else {
-            showError(res?.data?.message || 'Credenciales incorrectas.');
-            setLoading(false);
-            inputPass.value = '';
-            inputPass.focus();
-        }
-    });
-
-    inputUser.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            inputPass.focus();
-        }
-    });
-
-    inputUser.addEventListener('input', hideError);
-    inputPass.addEventListener('input', hideError);
-
-});
-</script>
+        });
+    </script>
 
 </body>
+
 </html>

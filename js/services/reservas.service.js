@@ -49,6 +49,6 @@ const ReservasService = {
     },
 
     cancelarReserva(id) {
-        return ApiService.patch(`${API.RESERVAS}/reservas/${id}/cancelar`, {});
+        return ApiService.post(`${API.RESERVAS}/reservas/${id}/cancelar`, {});
     },
 };

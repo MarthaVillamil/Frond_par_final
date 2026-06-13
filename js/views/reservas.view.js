@@ -60,6 +60,7 @@ const ReservasView = {
         }
 
         for (const r of reservas) {
+            const esCancelada = r.estado === 'cancelada';
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${r.id}</td>
@@ -70,8 +71,8 @@ const ReservasView = {
                 <td>${r.hora}</td>
                 <td><span class="badge badge-${this.getBadgeReserva(r.estado)}">${r.estado}</span></td>
                 <td>
-                    <button class="btn btn-sm btn-secondary" data-id="${r.id}" data-action="editar-reserva">Editar</button>
-                    <button class="btn btn-sm btn-danger" data-id="${r.id}" data-action="cancelar-reserva">Cancelar</button>
+                    ${!esCancelada ? `<button class="btn btn-sm btn-secondary" data-id="${r.id}" data-action="editar-reserva">Editar</button>` : ''}
+                    ${!esCancelada ? `<button class="btn btn-sm btn-danger" data-id="${r.id}" data-action="cancelar-reserva">Cancelar</button>` : ''}
                 </td>
             `;
             tbody.appendChild(tr);
@@ -90,10 +91,10 @@ const ReservasView = {
 
     getBadgeMesa(estado) {
         const badges = {
-            disponible:    'success',
-            reservada:     'warning',
-            ocupada:       'danger',
-            fuera_servicio:'secondary',
+            disponible:     'success',
+            reservada:      'warning',
+            ocupada:        'danger',
+            fuera_servicio: 'secondary',
         };
         return badges[estado] ?? 'secondary';
     },
@@ -145,6 +146,11 @@ const ReservasView = {
             observaciones:     document.getElementById('input-observaciones').value.trim(),
             mesa_id:           parseInt(document.getElementById('input-mesa').value),
         };
+
+        const estadoEl = document.getElementById('input-estado-reserva');
+        if (estadoEl && estadoEl.value) {
+            data.estado = estadoEl.value;
+        }
 
         if (!data.nombre_cliente || !data.telefono_cliente || !data.fecha || !data.hora || !data.mesa_id) {
             UiService.toast('Complete todos los campos obligatorios.', 'error');
@@ -202,6 +208,8 @@ const ReservasView = {
     resetFormReserva() {
         document.getElementById('reserva-form').reset();
         this.reservaSeleccionada = null;
+        const estadoGroup = document.getElementById('grupo-estado-reserva');
+        if (estadoGroup) estadoGroup.classList.add('hidden');
     },
 
     bindEventos() {
@@ -251,6 +259,11 @@ const ReservasView = {
                     document.getElementById('input-hora').value           = r.hora;
                     document.getElementById('input-observaciones').value  = r.observaciones ?? '';
                     document.getElementById('input-mesa').value           = r.mesa_id;
+
+                    const estadoGroup = document.getElementById('grupo-estado-reserva');
+                    const estadoEl    = document.getElementById('input-estado-reserva');
+                    if (estadoGroup) estadoGroup.classList.remove('hidden');
+                    if (estadoEl)    estadoEl.value = r.estado;
                 }
             } else if (action === 'cancelar-reserva') {
                 await this.cancelarReserva(id);
@@ -262,20 +275,14 @@ const ReservasView = {
 
         document.getElementById('filtro-fecha')?.addEventListener('change', async (e) => {
             const fecha = e.target.value;
-            if (!fecha) {
-                await this.cargarReservas();
-                return;
-            }
+            if (!fecha) { await this.cargarReservas(); return; }
             const res = await ReservasService.listarReservasPorFecha(fecha);
             if (res?.ok && res.data?.success) this.renderTablaReservas(res.data.data);
         });
 
         document.getElementById('filtro-estado')?.addEventListener('change', async (e) => {
             const estado = e.target.value;
-            if (!estado) {
-                await this.cargarReservas();
-                return;
-            }
+            if (!estado) { await this.cargarReservas(); return; }
             const res = await ReservasService.listarReservasPorEstado(estado);
             if (res?.ok && res.data?.success) this.renderTablaReservas(res.data.data);
         });

@@ -1,11 +1,11 @@
 :root,
 [data-theme="dark"] {
-    --bg:           #1a1a2e;
-    --bg-2:         #16213e;
-    --bg-3:         #1e2a4a;
-    --bg-4:         #243156;
-    --border:       #2a3556;
-    --border-light: #354068;
+    --bg:           #57b172;
+    --bg-2:         #10516b;
+    --bg-3:         #173b1d;
+    --bg-4:         #53e077;
+    --border:       #1d723d;
+    --border-light: #13884e;
 
     --text:         #f5f0e8;
     --text-2:       #c8bfaf;
@@ -14,7 +14,7 @@
     --dorado:         #c9a84c;
     --dorado-hover:   #b8973b;
     --dorado-light:   rgba(201,168,76,.15);
-    --primary:        #c9a84c;
+    --primary:        #797a30;
     --primary-hover:  #b8973b;
     --primary-light:  rgba(201,168,76,.15);
 
